@@ -1,6 +1,6 @@
 package com.tdtu.ecommerce.security.config;
 
-import com.tdtu.ecommerce.entity.UserEntity;
+import com.tdtu.ecommerce.entity.User;
 import com.tdtu.ecommerce.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity user = userRepository.findByUsername(username)
+        User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
         List<GrantedAuthority> authorities = user.getRoles().stream()
